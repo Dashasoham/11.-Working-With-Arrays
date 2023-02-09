@@ -79,6 +79,50 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+// const user = "Steven Thomas Williams"; //stw
+
+console.log("---MY CODE---");
+const createUserName = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map(function (name) {
+        return name[0];
+      })
+      .join("");
+  });
+};
+createUserName(accounts);
+console.log(accounts);
+
+// console.log("---FROM THE COURSE_----");
+
+// const createUsernames = function (accs) {
+//   accs.forEach(function (acc) {
+//     acc.username = acc.owner
+//       .toLowerCase()
+//       .split(" ")
+//       .map((name) => name[0])
+//       .join("");
+//   });
+// };
+// createUsernames(accounts);
+// console.log(accounts);
+
+//---------------------------------
+
+// const username = user
+//   .toLowerCase()
+//   .split(" ")
+//   .map(function (name) {
+//     return name[0];
+//   })
+//   //.map((name) => name[0])
+
+//   .join("");
+// return username;
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -174,34 +218,116 @@ console.log(currenciesUnique);
 currenciesUnique.forEach(function (value, _, map) {
   console.log(`${value}:${value}`);
 });
-*/
+
 
 console.log("----CHALLENGE WITH THE DOGS----");
 
-const checkDogs = function (allAges) {
-  allAges.forEach(function (dog, i) {
-    if (dog >= 3) {
-      console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
-    } else {
-      console.log(`Dog number ${i + 1} is still a puppy 🐶`);
-    }
-  });
-};
+// const checkDogs = function (dogsJulia, dogsKate) {
+//   const dogsJuliaAjusted = dogsJulia.slice(1, 3);
+//   const dogs = dogsJuliaAjusted.concat(dogsKate);
+//   dogs.forEach(function (dog, i) {
+//     if (dog >= 3) {
+//       console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+//     } else {
+//       console.log(`Dog number ${i + 1} is still a puppy 🐶`);
+//     }
+//   });
+// };
 
-let dogsJulia = [3, 5, 2, 12, 7];
-let dogsJuliaAjusted = dogsJulia.slice(1, 3);
-console.log(dogsJuliaAjusted);
-
-let dogsKate = [4, 1, 15, 8, 3];
-
-const allAges = dogsJuliaAjusted.concat(dogsKate);
-checkDogs(allAges);
+// checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+// console.log("---TEST DATA 2---");
+// checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
 // console.log(allAges);
 
-// movements.forEach(function (movement, i, array) {
-//   if (movement > 0) {
-//     console.log(`${i + 1}: You deposited ${movement}`);
-//   } else {
-//     console.log(`${i + 1}: You deposeted ${Math.abs(movement)}`);
-//   }
+//
+
+
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const EurToUsd = 1.1;
+
+// const movementsUSD = movements.map(function (mov) {
+//   return mov * EurToUsd;
 // });
+console.log(movements);
+
+const movementsUSDfor = [];
+for (const mov of movements) movementsUSDfor.push(mov * EurToUsd);
+console.log(movementsUSDfor);
+
+const movementsUSD = movements.map((mov) => {
+  return mov * EurToUsd;
+});
+console.log(movementsUSD);
+
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `${i + 1}: You  ${mov > 0 ? "deposited" : "withdrew"} ${Math.abs(mov)}`
+);
+console.log(movementsDescriptions);
+
+//WHY ForEach cannot substitute MAP?
+// const movementsDescriptions2 = movements.forEach(function (mov, i) {
+//   `${i + 1}: You  ${mov > 0 ? "deposited" : "withdrew"} ${Math.abs(mov)}`;
+// });
+
+*/
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const EurToUsd = 1.1;
+
+// const movementsUSD = movements.map(function (mov) {
+//   return mov * EurToUsd;
+// });
+// console.log(movements);
+
+// const movementsUSDfor = [];
+// for (const mov of movements) movementsUSDfor.push(mov * EurToUsd);
+// console.log(movementsUSDfor);
+
+// const movementsUSD = movements.map((mov) => {
+//   return mov * EurToUsd;
+// });
+// console.log(movementsUSD);
+
+// const movementsDescriptions = [];
+
+// movements.forEach((mov, i) =>
+//   movementsDescriptions.push(
+//     `${i + 1}: You  ${mov > 0 ? "deposited" : "withdrew"} ${Math.abs(mov)}`
+//   )
+// );
+// console.log(movementsDescriptions);
+// console.log(movements);
+
+// WHY ForEach cannot substitute MAP?
+// const movementsDescriptions2 = movements.forEach(function (mov, i) {
+//   `${i + 1}: You  ${mov > 0 ? "deposited" : "withdrew"} ${Math.abs(mov)}`;
+// });
+
+console.log("---FILTER METHOD----");
+
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+console.log(movements);
+console.log(deposits);
+
+const depositsFor = [];
+for (const mov of movements)
+  if (mov > 0) {
+    depositsFor.push(mov);
+  }
+console.log(depositsFor);
+
+const withdrawals = movements.filter(function (mov) {
+  return mov < 0;
+});
+console.log(withdrawals);
+
+const withdrawals2 = [];
+for (const withdraw of movements) {
+  if (withdraw < 0) withdrawals2.push(withdraw);
+}
+console.log(withdrawals2);
