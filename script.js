@@ -175,3 +175,33 @@ currenciesUnique.forEach(function (value, _, map) {
   console.log(`${value}:${value}`);
 });
 */
+
+console.log("----CHALLENGE WITH THE DOGS----");
+
+const checkDogs = function (allAges) {
+  allAges.forEach(function (dog, i) {
+    if (dog >= 3) {
+      console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+    } else {
+      console.log(`Dog number ${i + 1} is still a puppy 🐶`);
+    }
+  });
+};
+
+let dogsJulia = [3, 5, 2, 12, 7];
+let dogsJuliaAjusted = dogsJulia.slice(1, 3);
+console.log(dogsJuliaAjusted);
+
+let dogsKate = [4, 1, 15, 8, 3];
+
+const allAges = dogsJuliaAjusted.concat(dogsKate);
+checkDogs(allAges);
+// console.log(allAges);
+
+// movements.forEach(function (movement, i, array) {
+//   if (movement > 0) {
+//     console.log(`${i + 1}: You deposited ${movement}`);
+//   } else {
+//     console.log(`${i + 1}: You deposeted ${Math.abs(movement)}`);
+//   }
+// });
