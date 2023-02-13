@@ -119,7 +119,6 @@ const calcDisplaySummary = function (movements) {
     .filter((mov) => mov > 0)
     .map((deposit) => (deposit * 1.2) / 100)
     .filter(function (int, i, arr) {
-      console.log(arr);
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
@@ -384,7 +383,7 @@ console.log(totalDepositsUSD);
 //   if (withdraw < 0) withdrawals2.push(withdraw);
 // }
 // console.log(withdrawals2);
-
+*/
 console.log("----CHALLENGE WITH THE DOGS----");
 
 const checkDogs = function (dogsJulia, dogsKate) {
@@ -406,21 +405,25 @@ checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
 console.log("----HUMANAGE-----");
 
 const calcAverageHumanAge = function (ages) {
-  const dogAge = ages.map(function (age) {
-    // age <= 2 ? 2*age : 16+age*4);
-    if (age <= 2) {
-      return 2 * age;
-    } else {
-      return 16 + age * 4;
-    }
-  });
-  const adultAges = dogAge.filter(function (age) {
-    return age >= 18;
-  });
-  const averageHumanAgeAdults = adultAges.reduce(function (accumulator, age) {
-    return accumulator + age / adultAges.length;
-  }, 0);
-  console.log(averageHumanAgeAdults);
+  const dogAge = ages
+    .map(function (age) {
+      // age <= 2 ? 2*age : 16+age*4);
+      if (age <= 2) {
+        return 2 * age;
+      } else {
+        return 16 + age * 4;
+      }
+    })
+    .filter((age) => age >= 18)
+    .reduce((accumulator, age, i, arr) => accumulator + age / arr.length, 0);
+  // const adultAges = dogAge.filter(function (age) {
+  //   return age >= 18;
+  // });
+  // const averageHumanAgeAdults = adultAges.reduce(function (accumulator, age) {
+  //   return accumulator + age / adultAges.length;
+  // }, 0);
+  // console.log(averageHumanAgeAdults);
+  console.log(dogAge);
 };
 // return dogAge;
 
@@ -438,4 +441,3 @@ calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 //   return (accumulator + age) / humanAges.length;
 // }, humanAges[0]);
 // console.log(averageHumanAge);
-*/
