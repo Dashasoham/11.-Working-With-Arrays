@@ -61,11 +61,13 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   //EMPTYING THE CONTAINER
   containerMovements.innerHTML = "";
 
-  movements.forEach(function (movement, i) {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (movement, i) {
     const type = movement > 0 ? "deposit" : "withdrawal";
 
     const html = `<div class="movements__row">
@@ -227,6 +229,14 @@ btnClose.addEventListener("click", function (e) {
   } else {
     labelWelcome.textContent = `Wrong username OR password`;
   }
+});
+
+let sorted = false;
+
+btnSort.addEventListener("click", function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 // console.log("---FROM THE COURSE_----");
@@ -560,7 +570,7 @@ console.log(accounts);
 for (const acc of accounts) {
   acc.owner === "Jessica Davis" ? console.log(acc) : console.log();
 }
-*/
+
 
 let movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -588,3 +598,81 @@ console.log(account4.movements.every((mov) => mov > 0));
 
 const deposit = (mov) => mov > 0;
 console.log(movements.some(deposit));
+
+
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+
+console.log(arr.flat());
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+//flat
+const overallBalance = accounts
+  .map(function (acc) {
+    return acc.movements;
+  })
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
+
+//flatMap
+const overallBalance2 = accounts
+  .flatMap(function (acc) {
+    return acc.movements;
+  })
+
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance2);
+
+
+const owners = ["Jonas", "Zach", "Adam", "Martha"];
+console.log(owners);
+//SORT() MUTATES THE ARRAY
+console.log(owners.sort());
+console.log(owners);
+
+let movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+console.log(movements.slice());
+console.log(movements);
+
+//return <0, A,B(keep order)
+//return >0, B,A(switch order)
+
+//Ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+
+movements.sort((a, b) => a - b);
+console.log(movements);
+*/
+const x = new Array(7);
+console.log(x);
+
+//Empy arrays +  x.fill(1);
+x.fill(1, 3, 5);
+console.log(x);
+
+const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+arr.fill(23, 4, 6);
+console.log(arr);
+
+//Array.from()a
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (cur, i) => i + 1);
+console.log(z);
+
+const r = Array.from({ length: 100 }, (cur, i) => i + Math.random());
+console.log(r);
+
+labelBalance.addEventListener("click", function (e) {
+  const movementsUi = Array.from(
+    document.querySelectorAll(".movements__value")
+  );
+  console.log(movementsUi.map((el) => el.textContent.replace("€", "")));
+});
