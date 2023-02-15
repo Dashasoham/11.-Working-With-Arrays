@@ -239,6 +239,68 @@ btnSort.addEventListener("click", function (e) {
   sorted = !sorted;
 });
 
+console.log("---ARRAY METHODS PRACTICE---");
+
+//1.
+const bankDepositSum = accounts
+  .flatMap((acc) => acc.movements)
+  .filter((mov) => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+console.log(bankDepositSum);
+
+//2.
+
+// const numDeposits1000 = accounts
+//   .flatMap((acc) => acc.movements)
+//   .filter((mov) => mov > 1000).length;
+
+const numDeposits1000 = accounts
+  .flatMap((acc) => acc.movements)
+  //Why doesn't it count values less than 1000?
+  // .reduce((count, cur) => (cur >= 1000 ? count + 1 : count), 0);
+  //RETURNS 0 if count++
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+console.log(numDeposits1000);
+
+//++
+
+let a = 10;
+console.log(++a);
+
+//3.
+
+const { deposits, withdrawals } = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+      sums[cur > 0 ? "deposits" : "withdrawals"] += cur;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+console.log(deposits, withdrawals);
+
+//4.
+const convertTitleCase = function (title) {
+  const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
+
+  const exeptions = ["a", "an", "and", "the", "but", "or", "on", "in", "with"];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(" ")
+    .map((word) =>
+      exeptions.includes(word) ? word : word[0].toUpperCase() + word.slice(1)
+    )
+    .join(" ");
+  return capitalize(titleCase);
+};
+
+console.log(convertTitleCase("this is a title"));
+console.log(convertTitleCase("this is a LONG title but not too long"));
+console.log(convertTitleCase("and here is another title with EXAMPLE"));
 // console.log("---FROM THE COURSE_----");
 
 // const createUsernames = function (accs) {
@@ -648,7 +710,7 @@ console.log(movements);
 
 movements.sort((a, b) => a - b);
 console.log(movements);
-*/
+
 const x = new Array(7);
 console.log(x);
 
@@ -674,5 +736,7 @@ labelBalance.addEventListener("click", function (e) {
   const movementsUi = Array.from(
     document.querySelectorAll(".movements__value")
   );
+  console.log(document.querySelectorAll(".movements__value"));
   console.log(movementsUi.map((el) => el.textContent.replace("€", "")));
 });
+*/
