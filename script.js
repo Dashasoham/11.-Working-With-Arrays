@@ -740,3 +740,102 @@ labelBalance.addEventListener("click", function (e) {
   console.log(movementsUi.map((el) => el.textContent.replace("€", "")));
 });
 */
+console.log("---LAST CHALLENGE WITH THE DOGS---");
+const dogs = [
+  { weight: 22, curFood: 250, owners: ["Alice", "Bob"] },
+  { weight: 8, curFood: 200, owners: ["Matilda"] },
+  { weight: 13, curFood: 275, owners: ["Sarah", "John"] },
+  { weight: 32, curFood: 340, owners: ["Michael"] },
+];
+
+//1.
+dogs.forEach(function (each) {
+  each.recommendedFood = Math.trunc(each.weight ** 0.75 * 28);
+});
+
+console.log(dogs);
+
+//2.
+const sarahDog = dogs.find(
+  (dog) => {
+    return dog.owners.includes("Sarah");
+  }
+
+  // function (dog) {
+  //   return dog.owners.includes("Sarah");
+  // }
+
+  // sarah.recommendedFood > sarah.curFood ? "Too much" : "Too little";
+);
+console.log(sarahDog);
+
+// console.log(
+//   `Sarah's dog is eating too ${
+//     sarahDog.curFood > sarahDog.recommendedFood ? "much" : "fflittle"
+//   }`
+// );
+
+//3.
+const ownersEatTooMuch = dogs
+  .filter((dog) => dog.curFood > dog.recommendedFood)
+  .flatMap((dog) => dog.owners);
+
+const ownersEatTooLittle = dogs
+  .filter((dog) => dog.curFood < dog.recommendedFood)
+  .flatMap((dog) => dog.owners);
+
+console.log(ownersEatTooMuch, ownersEatTooLittle);
+
+//4.
+console.log(`${ownersEatTooMuch.join(" and ")}'s dogs eat too much!`);
+console.log(`${ownersEatTooLittle.join(" and ")}'s dogs eat too little!`);
+
+//5.
+console.log(dogs.some((dog) => dog.curFood === dog.recommendedFood));
+
+//6.
+console.log(
+  dogs.some(
+    (dog) =>
+      dog.curFood > dog.recommendedFood * 0.9 &&
+      dog.curFood < dog.recommendedFood * 1.1
+  )
+);
+
+//
+const checkEatingOk = (dog) =>
+  dog.curFood > dog.recommendedFood * 0.9 &&
+  dog.curFood < dog.recommendedFood * 1.1;
+
+console.log(dogs.some(checkEatingOk));
+
+//7.
+console.log(dogs.filter(checkEatingOk));
+
+// Create a shallow copy of the 'dogs' array and sort it by recommended food portion in an ascending order (keep in mind that the portions are inside the array's objects 😉)
+//8.
+const dogsCopy = dogs.slice().sort((a, b) => {
+  if (a.recommendedFood > b.recommendedFood) return 1;
+  if (a.recommendedFood < b.recommendedFood) return -1;
+});
+
+console.log(dogsCopy);
+
+//SORT() MUTATES THE ARRAY
+
+let movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+console.log(movements.slice());
+console.log(movements);
+
+//return <0, A,B(keep order)
+//return >0, B,A(switch order)
+
+//Ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+
+movements.sort((a, b) => a - b);
+console.log(movements);
